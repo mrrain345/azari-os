@@ -1,0 +1,16 @@
+copr:
+  - solopasha/hyprland
+
+packages:
+  - hyprland
+  - hyprlock
+  - hyprpolkitagent
+  - hyprshot
+  - hyprnome
+  - uwsm
+
+  - xdg-desktop-portal-gtk
+  - xdg-desktop-portal-hyprland
+  - xdg-user-dirs
+
+  - kitty

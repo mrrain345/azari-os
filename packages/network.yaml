@@ -1,0 +1,16 @@
+packages:
+  - NetworkManager
+  - NetworkManager-wifi
+  - NetworkManager-tui
+
+  - openssh-clients
+  - openssl
+
+  # ip tools
+  - iproute
+  - iproute-tc
+
+  # Firewall
+  - iptables
+  - nftables
+  - iptables-nft

@@ -1,0 +1,17 @@
+packages:
+  - bash-completion
+  - zsh
+  - vim-minimal
+  - nano
+
+  - hostname
+  - sudo
+  - attr
+  - acl
+  - lsof
+
+  - tar
+  - zip
+  - less
+  - curl
+  - jq

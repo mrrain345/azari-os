@@ -1,0 +1,8 @@
+import:
+  - base.yaml
+  - cli-tools.yaml
+  - containers.yaml
+  - development.yaml
+  - hardware.yaml
+  - network.yaml
+  # - nvidia.yaml

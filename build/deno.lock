@@ -1,0 +1,68 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/cli@^1.0.19": "1.0.19",
+    "jsr:@std/collections@^1.1.1": "1.1.1",
+    "jsr:@std/fmt@^1.0.8": "1.0.8",
+    "jsr:@std/fs@^1.0.18": "1.0.18",
+    "jsr:@std/ini@~0.225.2": "0.225.2",
+    "jsr:@std/path@^1.1.0": "1.1.0",
+    "jsr:@std/text@^1.0.14": "1.0.14",
+    "jsr:@std/toml@^1.0.7": "1.0.7",
+    "jsr:@std/yaml@^1.0.7": "1.0.7",
+    "npm:zod@^3.25.42": "3.25.42"
+  },
+  "jsr": {
+    "@std/cli@1.0.19": {
+      "integrity": "b3601a54891f89f3f738023af11960c4e6f7a45dc76cde39a6861124cba79e88"
+    },
+    "@std/collections@1.1.1": {
+      "integrity": "eff6443fbd9d5a6697018fb39c5d13d5f662f0045f21392d640693d0008ab2af"
+    },
+    "@std/fmt@1.0.8": {
+      "integrity": "71e1fc498787e4434d213647a6e43e794af4fd393ef8f52062246e06f7e372b7"
+    },
+    "@std/fs@1.0.18": {
+      "integrity": "24bcad99eab1af4fde75e05da6e9ed0e0dce5edb71b7e34baacf86ffe3969f3a",
+      "dependencies": [
+        "jsr:@std/path"
+      ]
+    },
+    "@std/ini@0.225.2": {
+      "integrity": "c70f6560dacb7e333c2f868aa09aaa4117e6618cc66c60d0b4ca716c135c8e67"
+    },
+    "@std/path@1.1.0": {
+      "integrity": "ddc94f8e3c275627281cbc23341df6b8bcc874d70374f75fec2533521e3d6886"
+    },
+    "@std/text@1.0.14": {
+      "integrity": "1a810108482414d19112b8b506ad0b7cba826000cd13f74274ffda6dd83d273f"
+    },
+    "@std/toml@1.0.7": {
+      "integrity": "3c86f8bbde31578da33d2fbe410b80e3cb672b66e008e06cf41afc4d7409921c",
+      "dependencies": [
+        "jsr:@std/collections"
+      ]
+    },
+    "@std/yaml@1.0.7": {
+      "integrity": "b4b9f6a625a6827ca2b75a3d240558b5ffd8b9a29945ec7614871be7b711a10a"
+    }
+  },
+  "npm": {
+    "zod@3.25.42": {
+      "integrity": "sha512-PcALTLskaucbeHc41tU/xfjfhcz8z0GdhhDcSgrCTmSazUuqnYqiXO63M0QUBVwpBlsLsNVn5qHSC5Dw3KZvaQ=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/cli@^1.0.19",
+      "jsr:@std/fmt@^1.0.8",
+      "jsr:@std/fs@^1.0.18",
+      "jsr:@std/ini@~0.225.2",
+      "jsr:@std/path@^1.1.0",
+      "jsr:@std/text@^1.0.14",
+      "jsr:@std/toml@^1.0.7",
+      "jsr:@std/yaml@^1.0.7",
+      "npm:zod@^3.25.42"
+    ]
+  }
+}

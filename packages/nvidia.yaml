@@ -1,0 +1,21 @@
+packages:
+  - akmod-nvidia-open
+  - xorg-x11-drv-nvidia-cuda
+  - libva
+  - libva-nvidia-driver
+  - nvidia-container-toolkit
+
+systemd:
+  nvidia-cdi:
+    type: system
+    enabled: true
+    service:
+      unit:
+        description: Generate NVIDIA Container Toolkit CDI specification
+        after: basic.target
+      service:
+        type: oneshot
+        exec-start: /usr/bin/nvidia-cdi cdi generate --output /etc/cdi/nvidia.json
+        remain-after-exit: true
+      install:
+        wanted-by: multi-user.target

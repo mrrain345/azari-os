@@ -1,0 +1,5 @@
+packages:
+  - podman
+  - crun
+  - criu
+  - criu-libs

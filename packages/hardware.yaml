@@ -1,0 +1,8 @@
+packages:
+  # Firmware
+  - linux-firmware
+  - fwupd
+
+  # CPU optimization
+  - irqbalance
+  - stalld
