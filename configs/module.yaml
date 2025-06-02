@@ -1,4 +1,5 @@
 import:
+  - fstab.yaml
   - ostree.yaml
   - symlinks.yaml
   - system.yaml

@@ -1,4 +1,3 @@
 symlinks:
   "/etc/machine-id": "/var/preserve/machine-id"
-  "/etc/fstab": "/var/preserve/fstab"
   "/etc/NetworkManager/system-connections": "/var/preserve/NetworkManager/system-connections"
