@@ -36,7 +36,9 @@ export default ModuleSection("rpm-repo", {
 
       if (repo.gpgkey === null && repo.gpgcheck) {
         error(
-          `Repository '${emph(id)}' has 'gpgcheck' enabled but no 'gpgkey' provided.`,
+          `Repository '${emph(
+            id,
+          )}' has 'gpgcheck' enabled but no 'gpgkey' provided.`,
         )
       }
 
@@ -60,13 +62,10 @@ export default ModuleSection("rpm-repo", {
 
       if (!DRY_RUN) {
         await fs.ensureDir(path.dirname(repoPath))
-        await Deno.writeTextFile(repoPath, content)
+        await Deno.writeTextFile(repoPath, content + "\n")
       }
     }
 
-    // Refresh the repository metadata
-    // suppress exit code 100, which means no updates available
-    // but don't suppress other errors
-    await run("dnf check-update || [ $? -eq 100 ]")
+    // await run("dnf check-update || [ $? -eq 100 ]")
   },
 })

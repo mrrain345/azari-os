@@ -14,6 +14,6 @@ export default ModuleSection("packages", {
 
   async execute(state) {
     if (state.length === 0) return
-    await run(`dnf install -y ${state.join(" ")}`)
+    await run(`./install-packages.sh ${state.join(" ")}`)
   },
 })

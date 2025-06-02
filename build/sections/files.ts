@@ -72,7 +72,7 @@ export default ModuleSection("files", {
       if (DRY_RUN) continue
 
       await fs.ensureDir(path.dirname(filePath))
-      await Deno.writeTextFile(filePath, content)
+      await Deno.writeTextFile(filePath, content + "\n")
     }
   },
 })

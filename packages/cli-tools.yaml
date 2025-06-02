@@ -16,3 +16,4 @@ packages:
   - curl
   - jq
   - man-db
+  - rsync
