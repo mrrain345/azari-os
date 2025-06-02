@@ -9,15 +9,13 @@ COPY . /usr/lib/azari/current
 WORKDIR /usr/lib/azari/current
 
 # Run build script
-RUN deno task -c build/deno.json build && ostree container commit
+RUN deno task -c build/deno.json build
 
 # Clean up
 WORKDIR /
 RUN rm -rf /tmp/deno
 RUN dnf clean all
 RUN rm -rf /var/*
-
-RUN ls -l /
 
 ## Commit and verify final image
 RUN ostree container commit

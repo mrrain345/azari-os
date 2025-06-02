@@ -2,6 +2,7 @@ import:
   - packages
   - hyprland
   - systemd
+  - programs
 
 users:
   mrrain:

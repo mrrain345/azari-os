@@ -1,9 +1,10 @@
 import { z } from "zod"
 
 import _import from "./sections/import.ts"
-import users from "./sections/users.ts"
+import rpmRepo from "./sections/rpm-repo.ts"
 import copr from "./sections/copr.ts"
 import packages from "./sections/packages.ts"
+import users from "./sections/users.ts"
 import files from "./sections/files.ts"
 import systemd from "./sections/systemd.ts"
 
@@ -12,6 +13,7 @@ import systemd from "./sections/systemd.ts"
  */
 export const SectionOrder = [
   "import",
+  "rpm-repo",
   "copr",
   "packages",
   "users",
@@ -24,6 +26,7 @@ export const SectionOrder = [
  */
 export const Sections = {
   import: _import,
+  "rpm-repo": rpmRepo,
   users,
   copr,
   packages,

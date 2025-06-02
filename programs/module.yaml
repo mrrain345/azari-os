@@ -1,0 +1,3 @@
+import:
+  - flatpak.yaml
+  - vscode.yaml
