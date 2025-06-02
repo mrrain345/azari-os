@@ -1,0 +1,11 @@
+users:
+  mrrain:
+    fullname: MrRaiN
+    home: /var/home/mrrain
+    shell: /bin/zsh
+    uid: 1000
+    gid: 1000
+    groups:
+      - networkmanager
+      - wheel
+      - docker

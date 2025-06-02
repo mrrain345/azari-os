@@ -15,7 +15,7 @@ systemd:
         after: basic.target
       service:
         type: oneshot
-        exec-start: /usr/bin/nvidia-cdi cdi generate --output /etc/cdi/nvidia.json
+        exec-start: nvidia-cdi cdi generate --output /etc/cdi/nvidia.json
         remain-after-exit: true
       install:
         wanted-by: multi-user.target

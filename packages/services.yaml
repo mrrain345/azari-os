@@ -1,0 +1,3 @@
+packages:
+  - libsecret
+  - gnome-keyring

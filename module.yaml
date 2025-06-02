@@ -1,26 +1,6 @@
 import:
   - packages
+  - programs
+  - configs
   - hyprland
   - systemd
-  - programs
-
-users:
-  mrrain:
-    fullname: MrRaiN
-    home: /var/home/mrrain
-    shell: /bin/zsh
-    uid: 1000
-    gid: 1000
-    groups:
-      - networkmanager
-      - wheel
-      - docker
-
-files:
-  "/usr/lib/ostree/prepare-root.conf":
-    format: ini
-    content:
-      composefs:
-        enabled: true
-      etc:
-        transient: true

@@ -1,0 +1,8 @@
+files:
+  "/usr/lib/ostree/prepare-root.conf":
+    format: ini
+    content:
+      composefs:
+        enabled: true
+      etc:
+        transient: true

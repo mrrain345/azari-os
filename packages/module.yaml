@@ -6,3 +6,4 @@ import:
   - hardware.yaml
   - network.yaml
   # - nvidia.yaml
+  - services.yaml
