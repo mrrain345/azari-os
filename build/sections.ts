@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 import _import from "./sections/import.ts"
+import symlinks from "./sections/symlinks.ts"
 import rpmRepo from "./sections/rpm-repo.ts"
 import copr from "./sections/copr.ts"
 import packages from "./sections/packages.ts"
@@ -13,6 +14,7 @@ import systemd from "./sections/systemd.ts"
  */
 export const SectionOrder = [
   "import",
+  "symlinks",
   "rpm-repo",
   "copr",
   "packages",
@@ -26,6 +28,7 @@ export const SectionOrder = [
  */
 export const Sections = {
   import: _import,
+  symlinks,
   "rpm-repo": rpmRepo,
   users,
   copr,

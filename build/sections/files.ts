@@ -9,6 +9,7 @@ import * as toml from "@std/toml"
 export type FileFormat = z.infer<typeof FileFormatSchema>
 export const FileFormatSchema = z
   .enum(["plain", "json", "yaml", "ini", "toml"])
+  .default("plain")
   .describe("File format")
 
 export type File = z.infer<typeof FileSchema>
@@ -39,13 +40,17 @@ export default ModuleSection("files", {
 
       if (file.path && file.content) {
         error(
-          `File cannot have both '${emph("path")}' and '${emph("content")}' defined.`,
+          `File cannot have both '${emph("path")}' and '${emph(
+            "content",
+          )}' defined.`,
         )
       }
 
       if (!file.path && !file.content) {
         error(
-          `File must have either '${emph("path")}' or '${emph("content")}' defined.`,
+          `File must have either '${emph("path")}' or '${emph(
+            "content",
+          )}' defined.`,
         )
       }
 

@@ -5,5 +5,5 @@ import:
   - development.yaml
   - hardware.yaml
   - network.yaml
-  # - nvidia.yaml
+  - nvidia.yaml
   - services.yaml

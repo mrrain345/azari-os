@@ -5,9 +5,11 @@ Custom declarative immutable linux system based on Fedora bootc.
 ## Building an image
 
 ```sh
+AZARI_VERSION=# Assin a new version
 podman build --security-opt=label=disable --cap-add=all --device /dev/fuse -t docker.io/mrrain345/azari:$AZARI_VERSION .
 podman login -u mrrain345 docker.io
 podman push docker.io/mrrain345/azari:$AZARI_VERSION
+podman image scp mrrain@localhost::azari:$AZARI_VERSION
 sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:$AZARI_VERSION
 ```
 

@@ -1,5 +1,5 @@
 packages:
-  - akmod-nvidia-open
+  - akmod-nvidia
   - xorg-x11-drv-nvidia-cuda
   - libva
   - libva-nvidia-driver

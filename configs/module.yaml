@@ -1,2 +1,5 @@
 import:
+  - ostree.yaml
+  - symlinks.yaml
+  - system.yaml
   - user.yaml

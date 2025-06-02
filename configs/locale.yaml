@@ -1,5 +1,0 @@
-files:
-  "/usr/lib/ostree/prepare-root.conf":
-    content: |
-      LANG=en_US.utf-8
-      LC_ALL=en_US.utf-8
