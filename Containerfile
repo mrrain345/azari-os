@@ -4,8 +4,8 @@ FROM quay.io/fedora/fedora-bootc:42
 ARG DENO_DIR=/tmp/deno
 COPY --from=docker.io/denoland/deno:bin-2.3.5 /deno /usr/bin/deno
 
-ARG GNUPGHOME=/usr/lib/gnupg
-RUN mkdir -p /usr/lib/gnupg
+ARG GNUPGHOME=/tmp/gnupg
+RUN mkdir -p $GNUPGHOME && chmod 700 $GNUPGHOME
 
 # Copy files
 COPY . /usr/lib/azari/current

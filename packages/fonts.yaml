@@ -1,0 +1,12 @@
+packages:
+  - default-fonts
+  - adwaita-fonts-all
+  - google-noto-fonts-all
+  - google-noto-cjk-fonts
+  - google-noto-color-emoji-fonts
+  - google-roboto-fonts
+  - google-droid-fonts-all
+  - dejavu-fonts-all
+  - fontawesome-fonts-all
+  - adobe-source-code-pro-fonts
+  - powerline-fonts
