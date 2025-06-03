@@ -71,8 +71,9 @@ export default ModuleSection("files", {
       console.log(content)
       if (DRY_RUN) continue
 
+      const newline = content[content.length - 1] === "\n" ? "" : "\n"
       await fs.ensureDir(path.dirname(filePath))
-      await Deno.writeTextFile(filePath, content + "\n")
+      await Deno.writeTextFile(filePath, content + newline)
     }
   },
 })

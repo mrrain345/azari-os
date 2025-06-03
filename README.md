@@ -19,3 +19,4 @@ sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:$AZAR
 - [Fedora bootc repo](https://gitlab.com/fedora/bootc/base-images)
 - [Fedora bootc examples](https://gitlab.com/fedora/bootc/examples)
 - [RPM Find](https://rpmfind.net/linux/rpm2html/search.php?query=&system=fedora&arch=x86_64)
+- [Fedora Packages](https://packages.fedoraproject.org/)

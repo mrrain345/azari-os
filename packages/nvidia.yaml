@@ -1,3 +1,10 @@
+exec:
+  phase: pre-install
+  command: |
+    dnf install -y \
+      https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-42.noarch.rpm \
+      https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-42.noarch.rpm
+
 packages:
   - akmod-nvidia
   - xorg-x11-drv-nvidia-cuda
@@ -15,7 +22,7 @@ systemd:
         after: basic.target
       service:
         type: oneshot
-        exec-start: nvidia-cdi cdi generate --output /etc/cdi/nvidia.json
+        exec-start: nvidia-ctk cdi generate --output /etc/cdi/nvidia.json
         remain-after-exit: true
       install:
         wanted-by: multi-user.target

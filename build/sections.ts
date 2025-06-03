@@ -8,19 +8,24 @@ import packages from "./sections/packages.ts"
 import users from "./sections/users.ts"
 import files from "./sections/files.ts"
 import systemd from "./sections/systemd.ts"
+import exec from "./sections/exec.ts"
 
 /**
  * Order in which sections should be executed.
  */
 export const SectionOrder = [
   "import",
+  "exec", // early
   "symlinks",
+  "users",
   "rpm-repo",
   "copr",
+  "exec", // pre-install
   "packages",
-  "users",
+  "exec", // post-install
   "files",
   "systemd",
+  "exec", // late
 ] as const
 
 /**
@@ -28,9 +33,10 @@ export const SectionOrder = [
  */
 export const Sections = {
   import: _import,
+  exec,
   symlinks,
-  "rpm-repo": rpmRepo,
   users,
+  "rpm-repo": rpmRepo,
   copr,
   packages,
   files,

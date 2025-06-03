@@ -1,3 +1,0 @@
-symlinks:
-  "/etc/machine-id": "/var/preserve/machine-id"
-  "/etc/NetworkManager/system-connections": "/var/preserve/NetworkManager/system-connections"
