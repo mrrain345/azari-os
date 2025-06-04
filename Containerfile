@@ -12,7 +12,7 @@ COPY . /usr/lib/azari/current
 WORKDIR /usr/lib/azari/current
 
 # Run build script
-RUN deno task -c build/deno.json build
+RUN deno task -c build/deno.json build && ostree container commit
 
 # Clean up
 WORKDIR /

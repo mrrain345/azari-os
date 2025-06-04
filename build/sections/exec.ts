@@ -1,38 +1,17 @@
 import { z } from "zod"
 import { error, ModuleSection, run, section } from "../lib.ts"
 
-// export const early = makeSection(
-//   "early",
-//   "Commands to execute before any other section",
-// )
-
-// export const preInstall = makeSection(
-//   "pre-install",
-//   "Commands to execute before packages installation",
-// )
-
-// export const postInstall = makeSection(
-//   "post-install",
-//   "Commands to execute after packages installation",
-// )
-
-// export const late = makeSection(
-//   "late",
-//   "Commands to execute after all other sections",
-// )
-
 const phases = ["early", "pre-install", "post-install", "late"] as const
 
+const ExecSchema = z.strictObject({
+  phase: z.enum(phases).describe("Phase of the installation"),
+  command: z.string().or(z.array(z.string())).describe("Command(s) to execute"),
+})
+
 export default ModuleSection("exec", {
-  schema: z
-    .strictObject({
-      phase: z.enum(phases).describe("Phase of the installation"),
-      command: z
-        .string()
-        .or(z.array(z.string()))
-        .describe("Command(s) to execute"),
-    })
-    .describe("Commands to execute at various phases of the installation"),
+  schema: ExecSchema.or(z.array(ExecSchema)).describe(
+    "Commands to execute at various phases of the installation",
+  ),
 
   state: {
     phase: 0,
@@ -45,14 +24,18 @@ export default ModuleSection("exec", {
   load(module, state) {
     const exec = module.exec
     if (!exec) return
-    section("Execute commands", `${exec.phase} phase`)
+    const execs = Array.isArray(exec) ? exec : [exec]
 
-    if (Array.isArray(exec.command)) {
-      console.log(exec.command.join("\n"))
-      state[exec.phase].push(...exec.command)
-    } else {
-      console.log(exec.command)
-      state[exec.phase].push(exec.command)
+    for (const ex of execs) {
+      section("Execute commands", `${ex.phase} phase`)
+
+      if (Array.isArray(ex.command)) {
+        console.log(ex.command.join("\n"))
+        state[ex.phase].push(...ex.command)
+      } else {
+        console.log(ex.command)
+        state[ex.phase].push(ex.command)
+      }
     }
   },
 
