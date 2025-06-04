@@ -7,7 +7,6 @@ files:
   "/etc/locale.conf":
     content: |
       LANG="en_US.utf-8"
-      LC_ALL="en_US.utf-8"
   "/etc/vconsole.conf":
     content: |
       KEYMAP=pl2
@@ -23,27 +22,6 @@ files:
         Option "XkbVariant" ","
       EndSection
 
-# systemd:
-#   set-locale:
-#     type: system
-#     enabled: true
-#     service:
-#       unit:
-#         description: Set system locale
-#         after: basic.target
-#       service:
-#         type: oneshot
-# TODO: support for multiple exec-start commands
-#         exec-start:
-#           - localectl set-locale LANG=en_US.UTF-8
-#           - localectl set-keymap pl2
-#           - localectl set-x11-keymap pl,us ,
-#         remain-after-exit: true
-#       install:
-#         wanted-by: multi-user.target
-
 symlinks:
   "/etc/localtime": "/usr/share/zoneinfo/Europe/Warsaw"
-  "/etc/machine-id": "/var/preserve/machine-id"
-  "/etc/systemd/system/default.target": "/usr/lib/systemd/system/graphical.target"
   "/etc/NetworkManager/system-connections": "/var/preserve/NetworkManager/system-connections"

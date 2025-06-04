@@ -1,4 +1,11 @@
-import { DRY_RUN, ModuleSection, emph, error, section } from "../lib.ts"
+import {
+  DRY_RUN,
+  ModuleSection,
+  emph,
+  error,
+  iniOptions,
+  section,
+} from "../lib.ts"
 import { z } from "zod"
 import * as path from "@std/path"
 import * as fs from "@std/fs"
@@ -87,7 +94,7 @@ function parseFile(format: FileFormat, content: unknown): string {
     case "yaml":
       return yaml.stringify(content)
     case "ini":
-      return ini.stringify(content)
+      return ini.stringify(content, iniOptions)
     case "toml":
       return toml.stringify(content as Record<string, unknown>)
     default:

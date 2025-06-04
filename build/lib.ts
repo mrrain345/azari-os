@@ -42,6 +42,16 @@ export function getArgs() {
 
 export const DRY_RUN = getArgs().dryRun
 
+export const iniOptions = {
+  replacer(key: string, value: unknown): string {
+    if (Array.isArray(value)) {
+      return value.map(String).join(`\n${key}=`)
+    } else {
+      return String(value)
+    }
+  },
+}
+
 export function section(label: string, text: string) {
   console.log(green(label), text)
 }

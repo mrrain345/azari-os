@@ -50,7 +50,7 @@ export default ModuleSection("rpm-repo", {
     for (const [id, repo] of state.entries()) {
       const repoPath = `/etc/yum.repos.d/${id}.repo`
 
-      if (await fs.exists(repoPath)) {
+      if (!DRY_RUN && (await fs.exists(repoPath))) {
         error(`Repository file '${emph(repoPath)}' already exists.`)
       }
 

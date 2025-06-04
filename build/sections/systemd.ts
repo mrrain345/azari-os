@@ -1,5 +1,13 @@
 import { z } from "zod"
-import { DRY_RUN, emph, error, ModuleSection, run, section } from "../lib.ts"
+import {
+  DRY_RUN,
+  emph,
+  error,
+  iniOptions,
+  ModuleSection,
+  run,
+  section,
+} from "../lib.ts"
 import * as ini from "@std/ini"
 import * as fs from "@std/fs"
 import * as path from "@std/path"
@@ -8,10 +16,7 @@ import { toPascalCase } from "@std/text"
 const ServiceConfigSchema = z
   .record(
     z.string().describe("Section"),
-    z.record(
-      z.string().describe("Key"),
-      z.union([z.string(), z.number(), z.boolean()]).describe("Value"),
-    ),
+    z.record(z.string().describe("Key"), z.any().describe("Value")),
   )
   .describe("Systemd service configuration")
 
@@ -82,13 +87,13 @@ function convertCasing(obj: Record<string, unknown>): Record<string, unknown> {
 }
 
 function getServicePath(name: string, service: Service): string {
-  return service.type === "user" ?
-      `/usr/lib/systemd/user/${name}.service`
+  return service.type === "user"
+    ? `/usr/lib/systemd/user/${name}.service`
     : `/usr/lib/systemd/system/${name}.service`
 }
 
 function getServiceContent(service: Service): string {
-  return ini.stringify(convertCasing(service.service))
+  return ini.stringify(convertCasing(service.service), iniOptions)
 }
 
 async function saveService(name: string, service: Service) {
