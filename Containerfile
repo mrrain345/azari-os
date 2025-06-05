@@ -14,12 +14,5 @@ WORKDIR /usr/lib/azari/current
 # Run build script
 RUN deno task -c build/deno.json build && ostree container commit
 
-# Clean up
-WORKDIR /
-RUN rm -rf /tmp/*
-RUN dnf clean all
-RUN rm -rf /var/*
-
-## Commit and verify final image
-RUN ostree container commit
+## Verify the final image
 RUN bootc container lint

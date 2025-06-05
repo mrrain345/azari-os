@@ -19,13 +19,17 @@ export default ModuleSection("exec", {
     "pre-install": [] as string[],
     "post-install": [] as string[],
     late: [] as string[],
+    loaded: new Set<string>(),
   },
 
-  load(module, state) {
+  load(module, state, modPath) {
     const exec = module.exec
     if (!exec) return
-    const execs = Array.isArray(exec) ? exec : [exec]
 
+    if (state.loaded.has(modPath)) return
+    state.loaded.add(modPath)
+
+    const execs = Array.isArray(exec) ? exec : [exec]
     for (const ex of execs) {
       section("Execute commands", `${ex.phase} phase`)
 

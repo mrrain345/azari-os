@@ -1,4 +1,6 @@
 packages:
+  - mozilla-fira-fonts-common
+  - fira-code-fonts
   - default-fonts
   - adwaita-fonts-all
   - google-noto-fonts-all
@@ -7,6 +9,3 @@ packages:
   - google-roboto-fonts
   - google-droid-fonts-all
   - dejavu-fonts-all
-  - fontawesome-fonts-all
-  - adobe-source-code-pro-fonts
-  - powerline-fonts

@@ -3,6 +3,8 @@ packages:
   - bash-completion
   - vim-minimal
   - nano
+  - git
+  - git-lfs
 
   - hostname
   - sudo

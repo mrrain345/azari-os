@@ -1,0 +1,74 @@
+@use "../../colors";
+
+$bg-color: colors.$bg;
+$bg-alt: colors.$bg-alt;
+$fg-color: colors.$fg;
+$accent-color: colors.$accent;
+$accent-muted: colors.$accent-muted;
+$box-shadow: colors.$box-shadow;
+
+window#launcher {
+  all: unset;
+
+  .Applauncher {
+    background-color: $bg-alt;
+    border-radius: 11px;
+    margin: 1rem;
+    padding: .8rem;
+    padding-right: .2rem;
+    box-shadow: $box-shadow;
+
+    .Search {
+      margin-bottom: .8rem;
+      margin-right: .6rem;
+      background-color: $bg-color;
+      color: $fg-color;
+    }
+
+    .AppButton {
+      min-width: 0;
+      min-height: 0;
+      padding: .5rem;
+      background-color: $bg-color;
+
+      icon {
+        font-size: 3em;
+        margin-right: .5rem;
+      }
+
+      label.name {
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+
+      label.description {
+        color: $accent-muted;
+        font-size: 0.9em;
+      }
+    }
+
+    .AppList {
+      & > * {
+        border: none;
+      }
+
+      .AppListContent {
+        padding-right: .6rem;
+      }
+    }
+
+    .not-found {
+      padding: 1rem;
+
+      icon {
+        font-size: 6em;
+        color: $accent-muted;
+      }
+
+      label {
+        color: $accent-muted;
+        font-size: 1.2em;
+      }
+    }
+  }
+}

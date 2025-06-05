@@ -24,6 +24,7 @@ export const FileSchema = z.strictObject({
   format: FileFormatSchema,
   path: z.string().optional().describe("Path to the source file"),
   content: z.any().optional().describe("File content"),
+  mode: z.number().optional().describe("File mode"),
 })
 
 const FilesSchema = z
@@ -32,7 +33,7 @@ const FilesSchema = z
 
 export default ModuleSection("files", {
   schema: FilesSchema,
-  state: new Map<string, string>(),
+  state: new Map<string, { content: string; mode: number }>(),
 
   load(module, state, _path) {
     const files = module.files
@@ -61,26 +62,29 @@ export default ModuleSection("files", {
         )
       }
 
+      const modeStr = String(file.mode ?? 644)
+      const mode = parseInt(modeStr, 8)
+
       if (file.path) {
         const sourcePath = path.resolve(_path, file.path)
         const content = Deno.readTextFileSync(sourcePath)
-        state.set(filePath, content)
+        state.set(filePath, { content, mode })
       } else if (file.content) {
         const content = parseFile(file.format, file.content)
-        state.set(filePath, content)
+        state.set(filePath, { content, mode })
       }
     }
   },
 
   async execute(state) {
-    for (const [filePath, content] of state.entries()) {
+    for (const [filePath, { content, mode }] of state.entries()) {
       section("Create file", filePath)
       console.log(content)
       if (DRY_RUN) continue
 
       const newline = content[content.length - 1] === "\n" ? "" : "\n"
       await fs.ensureDir(path.dirname(filePath))
-      await Deno.writeTextFile(filePath, content + newline)
+      await Deno.writeTextFile(filePath, content + newline, { mode })
     }
   },
 })

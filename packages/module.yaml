@@ -3,7 +3,6 @@ import:
   - cli-tools.yaml
   - codecs.yaml
   - containers.yaml
-  - development.yaml
   - fonts.yaml
   - hardware.yaml
   - network.yaml

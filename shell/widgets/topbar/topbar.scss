@@ -1,0 +1,57 @@
+@use "../../colors";
+
+$bg-color: colors.$bg;
+$bg-alt: colors.$bg-alt;
+$fg-color: colors.$fg;
+$accent-color: colors.$accent;
+$accent-muted: colors.$accent-muted;
+$opacity: 1.0;
+
+
+window.Topbar {
+  border: none;
+  box-shadow: none;
+  background-color: $bg-color;
+  color: $fg-color;
+  opacity: $opacity;
+  font-size: 1em;
+  font-weight: bold;
+
+  .Workspaces  {
+    button {
+      all: unset;
+      background-color: transparent;
+
+      &:hover label {
+        background-color: $bg-alt;
+        border-color: $accent-muted
+      }
+    }
+
+    label {
+      transition: 200ms;
+      padding: 0 8px;
+      margin: 2px;
+      border-radius: 6px;
+      border: 1pt solid transparent;
+    }
+
+    .focused.focused label {
+      color: $accent-color;
+      border-color: $accent-color;
+    }
+  }
+
+  .SysTray {
+    margin-right: 3px;
+
+    button {
+      padding: 0 3px;
+      background-color: transparent;
+    }
+  }
+
+  .RightIcons * {
+    padding: 0 3px;
+  }
+}

@@ -1,2 +1,3 @@
 import:
   - packages.yaml
+  - shell.yaml

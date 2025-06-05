@@ -1,5 +1,6 @@
 copr:
   - solopasha/hyprland
+  - leloubil/wl-clip-persist
 
 packages:
   - hyprland
@@ -7,10 +8,10 @@ packages:
   - hyprpolkitagent
   - hyprshot
   - hyprnome
+  - wl-clip-persist
   - uwsm
 
   - xdg-desktop-portal-gtk
   - xdg-desktop-portal-hyprland
   - xdg-user-dirs
 
-  - kitty

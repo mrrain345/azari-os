@@ -1,4 +1,5 @@
 packages:
+  - kitty
   - nautilus
   - gnome-software
   - gnome-disk-utility

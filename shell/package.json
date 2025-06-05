@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "astal": "/usr/share/astal/gjs",
+    "sass": "^1.89.1"
+  },
+  "name": "astal-shell"
+}
