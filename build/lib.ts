@@ -8,26 +8,30 @@ export type Module = {
   [K in SectionName]?: z.infer<(typeof Sections)[K]["schema"]>
 }
 
-export type ModuleSectionOptions<T, S extends z.ZodType> = {
+export type ModuleSectionOptions<N extends string, T, S extends z.ZodType> = {
   /** Schema for the section */
   schema: S
   /** Internal state of the section shared across all modules */
   state: T
   /** Load the module section */
-  load?: (module: Module, state: T, modPath: string) => void
+  load?: (
+    module: Module & { [key in N]: z.infer<S> },
+    state: T,
+    modPath: string,
+  ) => void
   /** Execute the section for all modules */
   execute?: (state: T) => void | Promise<void>
 }
 
-export type ModuleSection<T, S extends z.ZodType> = {
+export type ModuleSection<N extends string, T, S extends z.ZodType> = {
   /** Name of the section */
-  name: string
-} & ModuleSectionOptions<T, S>
+  name: N
+} & ModuleSectionOptions<N, T, S>
 
-export function ModuleSection<T, S extends z.ZodType>(
-  name: string,
-  part: ModuleSectionOptions<T, S>,
-): ModuleSection<T, S> {
+export function ModuleSection<N extends string, T, S extends z.ZodType>(
+  name: N,
+  part: ModuleSectionOptions<N, T, S>,
+): ModuleSection<N, T, S> {
   return { name, ...part }
 }
 

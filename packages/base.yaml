@@ -1,9 +1,0 @@
-packages:
-  - polkit
-  - tzdata
-  - nss-altfiles
-  - chrony
-  - keyutils
-  - logrotate
-  - gvfs
-  - gvfs-mtp

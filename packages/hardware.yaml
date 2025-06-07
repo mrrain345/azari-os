@@ -1,8 +1,14 @@
 packages:
   # Firmware
   - linux-firmware
+  - iwlwifi-dvm-firmware
+  - iwlwifi-mvm-firmware
   - fwupd
 
   # CPU optimization
   - irqbalance
   - stalld
+
+  # CLI tools
+  - pciutils
+  - nvme-cli

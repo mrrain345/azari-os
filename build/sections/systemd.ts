@@ -13,6 +13,7 @@ import * as fs from "@std/fs"
 import * as path from "@std/path"
 import { toPascalCase } from "@std/text"
 
+type ServiceConfig = z.infer<typeof ServiceConfigSchema>
 const ServiceConfigSchema = z
   .record(
     z.string().describe("Section"),
@@ -20,28 +21,19 @@ const ServiceConfigSchema = z
   )
   .describe("Systemd service configuration")
 
-const SystemServiceSchema = z.strictObject({
-  type: z.literal("system").describe("Service type"),
-  service: ServiceConfigSchema,
-  enabled: z
-    .boolean()
-    .default(false)
-    .describe("Whether the service should be enabled"),
-})
-
-const UserServiceSchema = z.strictObject({
-  type: z.literal("user").describe("Service type"),
-  service: ServiceConfigSchema,
-  "enabled-for": z
-    .array(z.string())
-    .default([])
-    .describe("List of users for which the service should be enabled"),
-})
+const ServiceSchema = z
+  .strictObject({
+    type: z.enum(["system", "user"]).default("system").describe("Service type"),
+    service: ServiceConfigSchema.optional(),
+    enabled: z
+      .boolean()
+      .default(false)
+      .describe("Whether the service should be enabled"),
+  })
+  .describe("Systemd service unit")
 
 export type Service = z.infer<typeof SystemdServiceSchema>
-const SystemdServiceSchema = z
-  .discriminatedUnion("type", [SystemServiceSchema, UserServiceSchema])
-  .describe("Systemd service")
+const SystemdServiceSchema = ServiceSchema
 
 const SystemdSchema = z
   .record(z.string().describe("Service name"), SystemdServiceSchema)
@@ -92,12 +84,13 @@ function getServicePath(name: string, service: Service): string {
     : `/usr/lib/systemd/system/${name}.service`
 }
 
-function getServiceContent(service: Service): string {
-  return ini.stringify(convertCasing(service.service), iniOptions)
+function getServiceContent(config: ServiceConfig): string {
+  return ini.stringify(convertCasing(config), iniOptions)
 }
 
 async function saveService(name: string, service: Service) {
-  const content = getServiceContent(service)
+  if (!service.service) return
+  const content = getServiceContent(service.service)
   const _path = getServicePath(name, service)
 
   section("Create systemd service", _path)
@@ -113,11 +106,8 @@ async function saveService(name: string, service: Service) {
 }
 
 async function enableService(name: string, service: Service) {
-  if (service.type === "user") {
-    for (const user of service["enabled-for"]) {
-      await run(`systemctl --user -M ${user}@ enable ${name}.service`)
-    }
-  } else if (service.enabled) {
-    await run(`systemctl enable ${name}.service`)
+  if (service.enabled) {
+    const flag = service.type === "user" ? "--global" : ""
+    await run(`systemctl ${flag} enable ${name}.service`)
   }
 }

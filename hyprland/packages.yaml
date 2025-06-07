@@ -9,9 +9,14 @@ packages:
   - hyprshot
   - hyprnome
   - wl-clip-persist
+  - mako
   - uwsm
 
   - xdg-desktop-portal-gtk
   - xdg-desktop-portal-hyprland
   - xdg-user-dirs
 
+systemd:
+  hyprpolkitagent:
+    type: user
+    enabled: true

@@ -3,4 +3,5 @@ packages:
   - nautilus
   - gnome-software
   - gnome-disk-utility
+  - nm-connection-editor-desktop
   - seahorse

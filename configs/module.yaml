@@ -1,5 +1,5 @@
 import:
-  - fstab.yaml
-  - ostree.yaml
-  - system.yaml
+  # - fstab.yaml
+  - locale.yaml
+  - misc.yaml
   - user.yaml

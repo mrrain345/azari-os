@@ -1,6 +1,5 @@
 import:
-  - packages
-  - programs
   - configs
   - hyprland
-  - systemd
+  - packages
+  - programs

@@ -1,16 +1,14 @@
 packages:
+  - tzdata
   - glibc-all-langpacks
 
 files:
-  "/etc/hostname":
-    content: "azari"
   "/etc/locale.conf":
     content: |
       LANG="en_US.utf-8"
   "/etc/vconsole.conf":
     content: |
       KEYMAP=pl2
-      FONT=eurlatgr
       XKBLAYOUT=pl,us
       XKBVARIANT=,
   "/etc/X11/xorg.conf/00-keyboard.conf":
@@ -24,4 +22,3 @@ files:
 
 symlinks:
   "/etc/localtime": "/usr/share/zoneinfo/Europe/Warsaw"
-  "/etc/NetworkManager/system-connections": "/var/preserve/NetworkManager/system-connections"

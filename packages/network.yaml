@@ -1,7 +1,6 @@
 packages:
   - NetworkManager
   - NetworkManager-wifi
-  - NetworkManager-tui
 
   - openssh-clients
   - openssl
@@ -11,6 +10,4 @@ packages:
   - iproute-tc
 
   # Firewall
-  - iptables
   - nftables
-  - iptables-nft

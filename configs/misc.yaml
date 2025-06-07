@@ -1,0 +1,33 @@
+files:
+  "/etc/hostname":
+    content: "azari"
+
+  "/usr/lib/systemd/journald.conf.d/10-persistent.conf":
+    format: ini
+    content:
+      Journal:
+        Storage: persistent
+
+  "/usr/lib/ostree/prepare-root.conf":
+    format: ini
+    content:
+      composefs:
+        enabled: true
+      etc:
+        transient: true
+
+  "/usr/lib/bootc/install/00-azari.toml":
+    format: toml
+    content:
+      install.filesystem.root:
+        type: btrfs
+      install:
+        kargs:
+          - splash
+          - quiet
+          - rd.driver.blacklist=nouveau
+          - modprobe.blacklist=nouveau
+          - nvidia-drm.modeset=1
+
+symlinks:
+  "/etc/NetworkManager/system-connections": "/var/preserve/NetworkManager/system-connections"
