@@ -1,0 +1,12 @@
+files:
+  "/etc/hostname":
+    content: "azari"
+
+  "/usr/lib/systemd/journald.conf.d/10-persistent.conf":
+    format: ini
+    content:
+      Journal:
+        Storage: persistent
+
+symlinks:
+  "/etc/NetworkManager/system-connections": "/var/preserve/NetworkManager/system-connections"

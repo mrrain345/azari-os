@@ -1,5 +1,4 @@
 packages:
-  - zsh
   - bash-completion
   - vim-minimal
   - nano

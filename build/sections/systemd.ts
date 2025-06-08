@@ -1,17 +1,8 @@
 import { z } from "zod"
-import {
-  DRY_RUN,
-  emph,
-  error,
-  iniOptions,
-  ModuleSection,
-  run,
-  section,
-} from "../lib.ts"
+import { iniOptions } from "../lib.ts"
 import * as ini from "@std/ini"
-import * as fs from "@std/fs"
-import * as path from "@std/path"
 import { toPascalCase } from "@std/text"
+import { builder, Section } from "../builder.ts"
 
 type ServiceConfig = z.infer<typeof ServiceConfigSchema>
 const ServiceConfigSchema = z
@@ -21,7 +12,8 @@ const ServiceConfigSchema = z
   )
   .describe("Systemd service configuration")
 
-const ServiceSchema = z
+type SystemdService = z.infer<typeof SystemdServiceSchema>
+const SystemdServiceSchema = z
   .strictObject({
     type: z.enum(["system", "user"]).default("system").describe("Service type"),
     service: ServiceConfigSchema.optional(),
@@ -32,35 +24,30 @@ const ServiceSchema = z
   })
   .describe("Systemd service unit")
 
-export type Service = z.infer<typeof SystemdServiceSchema>
-const SystemdServiceSchema = ServiceSchema
-
 const SystemdSchema = z
-  .record(z.string().describe("Service name"), SystemdServiceSchema)
-  .describe("Systemd services")
+  .strictObject({
+    services: z
+      .record(z.string().describe("Service name"), SystemdServiceSchema)
+      .describe("Systemd services"),
+  })
+  .partial()
+  .describe("Systemd configuration")
 
-export default ModuleSection("systemd", {
+export default Section("systemd", {
   schema: SystemdSchema,
-  state: new Map<string, Service>(),
 
-  load(module, state) {
-    const systemd = module.systemd
-    if (!systemd) return
-
-    for (const [name, service] of Object.entries(systemd)) {
-      if (state.has(name)) {
-        error(`Systemd service '${name}' is already defined.`)
+  load(systemd) {
+    for (const [name, service] of Object.entries(systemd.services ?? {})) {
+      if (service.service) {
+        const content = getServiceContent(service.service)
+        const _path = getServicePath(name, service)
+        builder.file(_path, content)
       }
 
-      section(`Create systemd ${service.type} service`, name)
-      state.set(name, service)
-    }
-  },
-
-  async execute(state) {
-    for (const [name, service] of state.entries()) {
-      await saveService(name, service)
-      await enableService(name, service)
+      if (service.enabled) {
+        const flag = service.type === "user" ? "--global" : ""
+        builder.run(`systemctl ${flag} enable ${name}.service`)
+      }
     }
   },
 })
@@ -78,7 +65,7 @@ function convertCasing(obj: Record<string, unknown>): Record<string, unknown> {
   return result
 }
 
-function getServicePath(name: string, service: Service): string {
+function getServicePath(name: string, service: SystemdService): string {
   return service.type === "user"
     ? `/usr/lib/systemd/user/${name}.service`
     : `/usr/lib/systemd/system/${name}.service`
@@ -86,28 +73,4 @@ function getServicePath(name: string, service: Service): string {
 
 function getServiceContent(config: ServiceConfig): string {
   return ini.stringify(convertCasing(config), iniOptions)
-}
-
-async function saveService(name: string, service: Service) {
-  if (!service.service) return
-  const content = getServiceContent(service.service)
-  const _path = getServicePath(name, service)
-
-  section("Create systemd service", _path)
-  console.log(content)
-  if (DRY_RUN) return
-
-  if (await fs.exists(_path)) {
-    error(`Systemd service '${emph(name)}' already exists.`)
-  }
-
-  await fs.ensureDir(path.dirname(_path))
-  await Deno.writeTextFile(_path, content, { createNew: true })
-}
-
-async function enableService(name: string, service: Service) {
-  if (service.enabled) {
-    const flag = service.type === "user" ? "--global" : ""
-    await run(`systemctl ${flag} enable ${name}.service`)
-  }
 }

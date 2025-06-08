@@ -1,0 +1,10 @@
+manifest:
+  base: quay.io/fedora/fedora-bootc:42
+  stages:
+    - stages/00-boot
+    - stages/05-hardware
+    - stages/10-base
+    - stages/30-system
+    - stages/50-environment
+    - stages/80-hyprland
+    - stages/90-programs

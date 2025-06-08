@@ -17,6 +17,7 @@ packages:
   - xdg-user-dirs
 
 systemd:
-  hyprpolkitagent:
-    type: user
-    enabled: true
+  services:
+    hyprpolkitagent:
+      type: user
+      enabled: true

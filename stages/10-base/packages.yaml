@@ -1,0 +1,9 @@
+packages:
+  - zsh
+  - nss-altfiles
+  - keyutils
+  - logrotate
+
+  - plymouth
+  - plymouth-system-theme
+  - plymouth-theme-spinner

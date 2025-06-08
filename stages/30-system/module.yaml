@@ -1,5 +1,3 @@
 import:
-  # - fstab.yaml
   - locale.yaml
-  - misc.yaml
   - user.yaml

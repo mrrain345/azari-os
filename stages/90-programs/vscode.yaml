@@ -6,3 +6,4 @@ rpm-repo:
 
 packages:
   - code
+  - nodejs22

@@ -1,0 +1,9 @@
+packages:
+  - libsecret
+  - gnome-keyring
+  - gnome-keyring-pam
+  - polkit
+  - gvfs
+  - gvfs-mtp
+  - console-login-helper-messages-issuegen
+  - console-login-helper-messages-profile

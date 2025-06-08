@@ -1,22 +1,19 @@
 import { z } from "zod"
-import { run, ModuleSection, section } from "../lib.ts"
+import { builder, Section } from "../builder.ts"
 
-export default ModuleSection("copr", {
+let enabled = false
+
+export default Section("copr", {
   schema: z.array(z.string()).describe("Copr repositories to enable"),
-  state: [] as string[],
 
-  load(module, state) {
-    const copr = module.copr
-    if (!copr) return
-    section("Enable COPR repo", copr.join(" "))
-    state.push(...copr)
-  },
+  load(copr) {
+    if (!enabled) {
+      enabled = true
+      builder.run("dnf install -y 'dnf5-command(copr)'")
+    }
 
-  async execute(state) {
-    await run("dnf install -y 'dnf5-command(copr)'")
-
-    for (const repo of state) {
-      await run(`dnf copr enable -y ${repo}`)
+    for (const repo of copr) {
+      builder.run(`dnf copr enable -y ${repo}`)
     }
   },
 })

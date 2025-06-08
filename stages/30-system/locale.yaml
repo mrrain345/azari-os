@@ -11,7 +11,8 @@ files:
       KEYMAP=pl2
       XKBLAYOUT=pl,us
       XKBVARIANT=,
-  "/etc/X11/xorg.conf/00-keyboard.conf":
+  "/etc/X11/xorg.conf.d/00-keyboard.conf":
+    ensure-dir: true
     content: |
       Section "InputClass"
         Identifier "system-keyboard"

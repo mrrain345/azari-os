@@ -1,9 +1,0 @@
-import:
-  - cli-tools.yaml
-  - codecs.yaml
-  - containers.yaml
-  - fonts.yaml
-  - hardware.yaml
-  - misc.yaml
-  - network.yaml
-  - nvidia.yaml

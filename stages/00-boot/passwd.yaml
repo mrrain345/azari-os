@@ -1,0 +1,31 @@
+files:
+  "/usr/libexec/set-user-passwd":
+    chmod: 700
+    content: |
+      #!/bin/sh
+      set -euo pipefail
+      userdbctl -R --output=classic | while read -r USER_ENTRY; do
+        local USER_NAME=$(echo "$USER_ENTRY" | cut -d: -f1)
+        local USER_HOME=$(echo "$USER_ENTRY" | cut -d: -f6)
+        local PASSWD_FILE="$USER_HOME/.config/passwd"
+
+        if [ -f "$PASSWD_FILE" ]; then
+          passwd --stdin "$USER_NAME" < "$PASSWD_FILE"
+        fi
+      done
+
+systemd:
+  services:
+    set-user-password:
+      type: system
+      enabled: true
+      service:
+        unit:
+          description: Set user password provided in ~/.config/passwd file
+          after: basic.target
+        service:
+          type: oneshot
+          exec-start: /usr/libexec/set-user-passwd
+          remain-after-exit: true
+        install:
+          wanted-by: multi-user.target

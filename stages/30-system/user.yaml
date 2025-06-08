@@ -1,10 +1,10 @@
 users:
   mrrain:
     fullname: MrRaiN
+    uid: 1000
     home: /var/home/mrrain
     shell: /bin/zsh
-    uid: 1000
-    gid: 1000
     groups:
       - wheel
       - docker
+

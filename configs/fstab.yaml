@@ -1,9 +1,0 @@
-files:
-  "/etc/fstab":
-    content: |
-      # DEVICE                                    MOUNT     TYPE    OPTIONS                         DUMP  FSCK
-      #UUID=532392b9-7cc9-4dc4-bccd-bb3de8b21415  /         btrfs   subvol=root,compress=zstd:1,ro  0     0
-      UUID=d8536a33-67a6-40c7-b924-fa8e71f2e641   /boot     ext4    defaults                        1     2
-      UUID=1CDC-CA6C                              /boot/efi vfat    umask=0077,shortname=winnt      0     2
-      UUID=532392b9-7cc9-4dc4-bccd-bb3de8b21415   /home     btrfs   subvol=home,compress=zstd:1     0     0
-      UUID=532392b9-7cc9-4dc4-bccd-bb3de8b21415   /var      btrfs   subvol=var,compress=zstd:1      0     0

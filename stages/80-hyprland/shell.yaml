@@ -1,0 +1,25 @@
+packages:
+  - aylurs-gtk-shell2
+
+files:
+  "/usr/lib/azari/astal-shell":
+    path: shell/astal-shell
+  "/usr/bin/astal-shell":
+    chmod: 755
+    content: |
+      #!/bin/sh
+      ags run /usr/lib/azari/astal-shell
+
+
+# build:
+#   from: quay.io/fedora/fedora-bootc:42
+#   build: |
+#     RUN dnf install -y 'dnf5-command(copr)' && \
+#         dnf copr enable -y solopasha/hyprland
+#     RUN dnf install -y aylurs-gtk-shell2 nodejs22
+#     RUN npm install -g sass
+#     COPY ./shell /shell
+#     RUN ags bundle /shell/app.ts /astal-shell
+#   copy-output:
+#     from: /astal-shell
+#     to: /usr/lib/azari/astal-shell

@@ -1,6 +1,8 @@
 packages:
+  - flatpak
   - kitty
   - nautilus
+  - nautilus-python
   - gnome-software
   - gnome-disk-utility
   - nm-connection-editor-desktop

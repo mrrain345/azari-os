@@ -1,17 +1,9 @@
-import {
-  DRY_RUN,
-  ModuleSection,
-  emph,
-  error,
-  iniOptions,
-  section,
-} from "../lib.ts"
+import { emph, error, iniOptions } from "../lib.ts"
 import { z } from "zod"
-import * as path from "@std/path"
-import * as fs from "@std/fs"
 import * as yaml from "@std/yaml"
 import * as ini from "@std/ini"
 import * as toml from "@std/toml"
+import { builder, Section } from "../builder.ts"
 
 export type FileFormat = z.infer<typeof FileFormatSchema>
 export const FileFormatSchema = z
@@ -22,30 +14,34 @@ export const FileFormatSchema = z
 export type File = z.infer<typeof FileSchema>
 export const FileSchema = z.strictObject({
   format: FileFormatSchema,
-  path: z.string().optional().describe("Path to the source file"),
+  path: z
+    .string()
+    .optional()
+    .describe("Path to the source file, relative to the root directory"),
   content: z.any().optional().describe("File content"),
-  mode: z.number().optional().describe("File mode"),
+  "ensure-dir": z
+    .boolean()
+    .default(false)
+    .describe("Ensure the directory exists before creating the file"),
+  chmod: z.number().optional().describe("File mode"),
+  chown: z
+    .strictObject({
+      owner: z.string().or(z.number()).describe("Owner of the file"),
+      group: z.string().or(z.number()).describe("Group of the file"),
+    })
+    .optional(),
 })
 
 const FilesSchema = z
   .record(z.string().describe("Path to the file"), FileSchema)
   .describe("Files to create")
 
-export default ModuleSection("files", {
+export default Section("files", {
   schema: FilesSchema,
-  state: new Map<string, { content: string; mode: number }>(),
+  // state: new Map<string, { content: string; mode: number }>(),
 
-  load(module, state, _path) {
-    const files = module.files
-    if (!files) return
-
+  load(files) {
     for (const [filePath, file] of Object.entries(files)) {
-      section("Create file", filePath)
-
-      if (state.has(filePath)) {
-        error(`File '${emph(filePath)}' is already defined.`)
-      }
-
       if (file.path && file.content) {
         error(
           `File cannot have both '${emph("path")}' and '${emph(
@@ -62,29 +58,19 @@ export default ModuleSection("files", {
         )
       }
 
-      const modeStr = String(file.mode ?? 644)
-      const mode = parseInt(modeStr, 8)
+      const chmod = file.chmod !== undefined ? String(file.chmod) : undefined
+      const chown = file.chown && `${file.chown.owner}:${file.chown.group}`
 
       if (file.path) {
-        const sourcePath = path.resolve(_path, file.path)
-        const content = Deno.readTextFileSync(sourcePath)
-        state.set(filePath, { content, mode })
+        builder.copy(file.path, filePath, { chmod, chown })
       } else if (file.content) {
         const content = parseFile(file.format, file.content)
-        state.set(filePath, { content, mode })
+        builder.file(filePath, content, {
+          chmod,
+          chown,
+          ensureDir: file["ensure-dir"],
+        })
       }
-    }
-  },
-
-  async execute(state) {
-    for (const [filePath, { content, mode }] of state.entries()) {
-      section("Create file", filePath)
-      console.log(content)
-      if (DRY_RUN) continue
-
-      const newline = content[content.length - 1] === "\n" ? "" : "\n"
-      await fs.ensureDir(path.dirname(filePath))
-      await Deno.writeTextFile(filePath, content + newline, { mode })
     }
   },
 })
