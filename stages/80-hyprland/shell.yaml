@@ -3,7 +3,7 @@ packages:
 
 files:
   "/usr/lib/azari/astal-shell":
-    path: shell/astal-shell
+    path: ./astal-shell
   "/usr/bin/astal-shell":
     chmod: 755
     content: |

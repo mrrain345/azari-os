@@ -5,9 +5,9 @@ files:
       #!/bin/sh
       set -euo pipefail
       userdbctl -R --output=classic | while read -r USER_ENTRY; do
-        local USER_NAME=$(echo "$USER_ENTRY" | cut -d: -f1)
-        local USER_HOME=$(echo "$USER_ENTRY" | cut -d: -f6)
-        local PASSWD_FILE="$USER_HOME/.config/passwd"
+        USER_NAME=$(echo "$USER_ENTRY" | cut -d: -f1)
+        USER_HOME=$(echo "$USER_ENTRY" | cut -d: -f6)
+        PASSWD_FILE="$USER_HOME/.config/passwd"
 
         if [ -f "$PASSWD_FILE" ]; then
           passwd --stdin "$USER_NAME" < "$PASSWD_FILE"

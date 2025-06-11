@@ -7,3 +7,5 @@ rpm-repo:
 packages:
   - code
   - nodejs22
+
+raw: COPY --from=docker.io/denoland/deno:bin-2.3.5 /deno /usr/bin/deno

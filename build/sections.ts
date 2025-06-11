@@ -8,6 +8,7 @@ import rpmRepo from "./sections/rpm-repo.ts"
 import copr from "./sections/copr.ts"
 import packages from "./sections/packages.ts"
 import systemd from "./sections/systemd.ts"
+import raw from "./sections/raw.ts"
 import exec from "./sections/exec.ts"
 
 /**
@@ -22,6 +23,7 @@ export const SectionOrder = [
   "copr",
   "packages",
   "systemd",
+  "raw",
   "exec",
 ] as const
 
@@ -37,6 +39,7 @@ export const Sections = {
   copr,
   packages,
   systemd,
+  raw,
   exec,
 }
 

@@ -9,4 +9,6 @@ files:
         Storage: persistent
 
 symlinks:
-  "/etc/NetworkManager/system-connections": "/var/preserve/NetworkManager/system-connections"
+  "/etc/NetworkManager/system-connections":
+    remove-existing: true
+    target: /var/preserve/NetworkManager/system-connections

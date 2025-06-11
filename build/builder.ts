@@ -37,7 +37,12 @@ const context = {
   dirname: "",
   modules: new Set<string>(),
   current: -1,
-  stages: [] as Array<Record<Phase, string[]>>,
+  stages: [] as Array<{
+    packages: string[]
+    initial: string[]
+    standard: string[]
+    finalize: string[]
+  }>,
 }
 
 function setBase(base: string, dirname: string) {
@@ -54,6 +59,7 @@ function startStage(path: string) {
 
   context.current = context.stages.length
   context.stages.push({
+    packages: [],
     initial: [],
     standard: [],
     finalize: [],
@@ -82,7 +88,11 @@ function instruction(instr: string, args: string, phase?: Phase) {
 }
 
 function run(cmd: string, phase?: Phase) {
-  instruction("RUN", `${cmd.trimEnd()} && ostree container commit`, phase)
+  instruction("RUN", cmd, phase)
+}
+
+function packages(packages: string[]) {
+  context.stages[context.current].packages.push(...packages)
 }
 
 function copy(
@@ -189,22 +199,28 @@ function execute(version: string) {
   console.log("FROM", context.base)
 
   for (const stage of context.stages) {
-    for (const phase of phases) {
-      for (const instr of stage[phase]) {
-        console.log(instr)
-      }
+    console.log(stage.initial.join("\n"))
+
+    if (stage.packages.length !== 0) {
+      console.log(
+        "RUN dnf install -y",
+        stage.packages.join(" "),
+        "&& ostree container commit",
+      )
     }
+
+    console.log(stage.standard.join("\n"))
+    console.log(stage.finalize.join("\n"))
   }
 
   console.log(`COPY . /usr/lib/azari/current`)
 
   console.log("RUN ostree container commit")
-  console.log("RUN bootc container lint")
-
   console.log(`LABEL org.opencontainers.image.version ${version}`)
   console.log("LABEL containers.bootc 1")
   console.log("STOPSIGNAL SIGRTMIN+3")
   console.log('CMD ["/sbin/init"]')
+  console.log("RUN bootc container lint")
 }
 
 export const builder = {
@@ -216,6 +232,7 @@ export const builder = {
   loadModule,
   instruction,
   run,
+  packages,
   copy,
   file,
   execute,

@@ -9,11 +9,11 @@ export default Section("copr", {
   load(copr) {
     if (!enabled) {
       enabled = true
-      builder.run("dnf install -y 'dnf5-command(copr)'")
+      builder.run("dnf install -y 'dnf5-command(copr)'", "initial")
     }
 
     for (const repo of copr) {
-      builder.run(`dnf copr enable -y ${repo}`)
+      builder.run(`dnf copr enable -y ${repo}`, "initial")
     }
   },
 })
