@@ -1,0 +1,8 @@
+files:
+  "/etc/systemd/system/getty@tty1.service.d/autologin.conf":
+    format: plain
+    ensure-dir: true
+    content: |
+      [Service]
+      ExecStart=
+      ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin mrrain %I $TERM

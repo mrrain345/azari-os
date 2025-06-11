@@ -1,3 +1,4 @@
 import:
+  - autologin.yaml
   - hyprland.yaml
   - shell.yaml
