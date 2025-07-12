@@ -18,4 +18,6 @@ files:
           - quiet
           - rd.driver.blacklist=nouveau
           - modprobe.blacklist=nouveau
+          - rd.driver.blacklist=nova_core
+          - modprobe.blacklist=nova_core
           - nvidia-drm.modeset=1
