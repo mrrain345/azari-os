@@ -3,3 +3,4 @@ import:
   - containers.yaml
   - network.yaml
   - packages.yaml
+  - printer.yaml

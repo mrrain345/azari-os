@@ -5,6 +5,11 @@ Custom declarative immutable linux system based on Fedora bootc.
 ## Building an image
 
 ```sh
+# Rebuild, push to the registry and switch active system
+# - without upgrading the base image
+./build.sh switch
+
+# - with upgrading the base image
 ./build.sh upgrade
 ```
 

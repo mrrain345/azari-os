@@ -1,0 +1,7 @@
+packages:
+  - cups
+
+systemd:
+  services:
+    cups:
+      enabled: true

@@ -4,7 +4,7 @@ cd $(dirname $(readlink -f "$0"))
 
 if [ "$#" -lt 1 ]; then
   echo "Usage: $0 <action> [version]"
-  echo "Actions: build, switch, dry"
+  echo "Actions: build, switch, upgrade, dry"
   exit 1
 fi
 
@@ -30,7 +30,9 @@ if (skopeo inspect docker://$IMAGE:$VERSION >/dev/null 2>&1); then
 fi
 
 BUILD_DIR=$(mktemp -d /tmp/azari-build-XXXXXX)
-ACTIONS=(build upgrade dry)
+ACTIONS=(build switch upgrade dry)
+UPGRADE=$([ "$ACTION" = "upgrade" ] && echo "--pull=true" || echo "--pull=false")
+
 echo "Using build directory: $BUILD_DIR"
 
 if ! echo "${ACTIONS[@]}" | grep -q "\b$ACTION\b"; then
@@ -39,8 +41,8 @@ if ! echo "${ACTIONS[@]}" | grep -q "\b$ACTION\b"; then
   exit 1
 fi
 
-
 podman build \
+  $UPGRADE \
   --output=$BUILD_DIR \
   --build-arg=VERSION=$VERSION \
   -f Containerfile .
@@ -57,6 +59,7 @@ podman build \
   --security-opt=label=disable \
   --cap-add=all \
   --device /dev/fuse \
+  $UPGRADE \
   -f $BUILD_DIR/Containerfile \
   -t $IMAGE:$VERSION \
   -t $IMAGE:latest $BUILD_DIR
@@ -65,6 +68,6 @@ rm -rf $BUILD_DIR
 podman push $IMAGE:$VERSION
 podman push $IMAGE:latest
 
-if [ $ACTION = "upgrade" ]; then
+if [ "$ACTION" = "switch" ] || [ "$ACTION" = "upgrade" ]; then
   bootc upgrade
 fi
