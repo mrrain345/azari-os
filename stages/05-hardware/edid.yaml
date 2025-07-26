@@ -1,0 +1,4 @@
+# Virtual monitor EDID configuration (1920x1080@60Hz)
+files:
+  "/usr/lib/firmware/edid/fullhd.bin":
+    path: "res/edid-fullhd.bin"

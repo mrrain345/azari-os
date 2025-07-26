@@ -19,10 +19,6 @@ export const FileSchema = z.strictObject({
     .optional()
     .describe("Path to the source file, relative to the root directory"),
   content: z.any().optional().describe("File content"),
-  "ensure-dir": z
-    .boolean()
-    .default(false)
-    .describe("Ensure the directory exists before creating the file"),
   chmod: z.number().optional().describe("File mode"),
   chown: z
     .strictObject({
@@ -68,7 +64,6 @@ export default Section("files", {
         builder.file(filePath, content, {
           chmod,
           chown,
-          ensureDir: file["ensure-dir"],
         })
       }
     }

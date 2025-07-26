@@ -5,6 +5,10 @@ packages:
   - git
   - git-lfs
 
+  - stow
+  - zoxide
+  - fzf
+
   - hostname
   - sudo
   - attr

@@ -4,6 +4,7 @@ import { ModuleSchema, SectionOrder, Sections } from "./sections.ts"
 import * as yaml from "@std/yaml"
 import * as path from "@std/path"
 import { yellow } from "@std/fmt/colors"
+import { sha256 } from "js-sha256"
 
 type SectionName = (typeof SectionOrder)[number]
 export type Module = {
@@ -95,40 +96,45 @@ function packages(packages: string[]) {
   context.stages[context.current].packages.push(...packages)
 }
 
-function copy(
-  src: string,
-  dest: string,
+function _copy(
+  tmp: string,
+  path: string,
   options?: { chmod?: string; chown?: string },
   phase?: Phase,
 ) {
   const params = [
     options?.chown && `--chown=${options.chown}`,
     options?.chmod && `--chmod=${options.chmod}`,
-    src,
-    dest,
+    tmp,
+    path,
   ]
 
   const args = params.filter(Boolean).join(" ")
   instruction("COPY", args, phase)
 }
 
+function copy(
+  src: string,
+  dest: string,
+  options?: { chmod?: string; chown?: string },
+  phase?: Phase,
+) {
+  const _path = path.resolve(Deno.cwd(), src)
+  const content = Deno.readFileSync(_path)
+  const hash = sha256(content)
+  Deno.copyFileSync(_path, `/output/${hash}`)
+  _copy(hash, dest, options, phase)
+}
+
 function file(
   _path: string,
   content: string,
-  options?: { chmod?: string; chown?: string; ensureDir?: boolean },
+  options?: { chmod?: string; chown?: string },
   phase?: Phase,
 ) {
-  if (options?.ensureDir) {
-    run(`mkdir -p ${path.dirname(_path)}`, phase)
-  }
-  // Don't use `run` here, as it would not work with `ostree container commit`
-  instruction(
-    "RUN",
-    `cat <<~~EOF~~ > ${_path}\n${content.trimEnd()}\n~~EOF~~`,
-    phase,
-  )
-  if (options?.chown) run(`chown ${options.chown} ${_path}`)
-  if (options?.chmod) run(`chmod ${options.chmod} ${_path}`)
+  const hash = sha256(content)
+  Deno.writeTextFileSync(`/output/${hash}`, content)
+  _copy(hash, _path, options, phase)
 }
 
 function loadModule(impPath: string) {

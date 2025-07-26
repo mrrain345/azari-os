@@ -1,3 +1,4 @@
 import:
   - bootc.yaml
+  - kernel.yaml
   - passwd.yaml

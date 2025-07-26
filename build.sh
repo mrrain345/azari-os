@@ -2,15 +2,23 @@
 set -euo pipefail
 cd $(dirname $(readlink -f "$0"))
 
+ACTIONS=(build switch upgrade dry build-shell)
+
 if [ "$#" -lt 1 ]; then
   echo "Usage: $0 <action> [version]"
-  echo "Actions: build, switch, upgrade, dry"
+  echo "Actions: ${ACTIONS[*]}"
   exit 1
 fi
 
 IMAGE="docker.io/mrrain345/azari"
 ACTION=$1
 VERSION=${2:-next}
+
+if [ "$ACTION" = "build-shell" ]; then
+  echo "Building astal shell"
+  podman build -f shell.Containerfile --output=./res/astal-shell .
+  exit 0
+fi
 
 if [ "$VERSION" = "next" ]; then
   PREFIX=$(date --utc +%y.%-m.)
@@ -24,16 +32,19 @@ fi
 
 echo "Building $IMAGE:$VERSION"
 
+if [ ! -f ./res/astal-shell ]; then
+  echo "No astal shell found, please build it first."
+  echo "Run: $0 build-shell"
+  exit 1
+fi
+
 if (skopeo inspect docker://$IMAGE:$VERSION >/dev/null 2>&1); then
   echo "Version $VERSION already exists for $IMAGE"
   exit 1
 fi
 
 BUILD_DIR=$(mktemp -d /tmp/azari-build-XXXXXX)
-ACTIONS=(build switch upgrade dry)
 UPGRADE=$([ "$ACTION" = "upgrade" ] && echo "--pull=true" || echo "--pull=false")
-
-echo "Using build directory: $BUILD_DIR"
 
 if ! echo "${ACTIONS[@]}" | grep -q "\b$ACTION\b"; then
   echo "Invalid action: $ACTION"
@@ -41,8 +52,11 @@ if ! echo "${ACTIONS[@]}" | grep -q "\b$ACTION\b"; then
   exit 1
 fi
 
+echo "Build directory: $BUILD_DIR"
+
 podman build \
   $UPGRADE \
+  --network=host \
   --output=$BUILD_DIR \
   --build-arg=VERSION=$VERSION \
   -f Containerfile .
@@ -55,7 +69,12 @@ if [ "$ACTION" = "dry" ]; then
   exit 0
 fi
 
+echo "Containerfile built successfully"
+echo "Build directory: $BUILD_DIR"
+echo "Building the container image..."
+
 podman build \
+  --network=host \
   --security-opt=label=disable \
   --cap-add=all \
   --device /dev/fuse \

@@ -1,5 +1,5 @@
 {
-  "version": "4",
+  "version": "5",
   "specifiers": {
     "jsr:@std/cli@^1.0.19": "1.0.19",
     "jsr:@std/collections@^1.1.1": "1.1.1",
@@ -10,6 +10,7 @@
     "jsr:@std/text@^1.0.14": "1.0.14",
     "jsr:@std/toml@^1.0.7": "1.0.7",
     "jsr:@std/yaml@^1.0.7": "1.0.7",
+    "npm:js-sha256@~0.11.1": "0.11.1",
     "npm:zod@^3.25.42": "3.25.42"
   },
   "jsr": {
@@ -48,6 +49,9 @@
     }
   },
   "npm": {
+    "js-sha256@0.11.1": {
+      "integrity": "sha512-o6WSo/LUvY2uC4j7mO50a2ms7E/EAdbP0swigLV+nzHKTTaYnaLIWJ02VdXrsJX0vGedDESQnLsOekr94ryfjg=="
+    },
     "zod@3.25.42": {
       "integrity": "sha512-PcALTLskaucbeHc41tU/xfjfhcz8z0GdhhDcSgrCTmSazUuqnYqiXO63M0QUBVwpBlsLsNVn5qHSC5Dw3KZvaQ=="
     }
@@ -62,6 +66,7 @@
       "jsr:@std/text@^1.0.14",
       "jsr:@std/toml@^1.0.7",
       "jsr:@std/yaml@^1.0.7",
+      "npm:js-sha256@~0.11.1",
       "npm:zod@^3.25.42"
     ]
   }

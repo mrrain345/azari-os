@@ -1,7 +1,6 @@
 files:
   "/etc/systemd/system/getty@tty1.service.d/autologin.conf":
     format: plain
-    ensure-dir: true
     content: |
       [Service]
       ExecStart=

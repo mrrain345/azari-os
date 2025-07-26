@@ -8,4 +8,11 @@ packages:
   - code
   - nodejs22
 
+exec:
+  phase: finalize
+  command: |
+    npm install --global corepack@latest --cache /tmp/npm-cache \
+    && corepack enable \
+    && rm -rf /tmp/npm-cache
+
 raw: COPY --from=docker.io/denoland/deno:bin-2.3.5 /deno /usr/bin/deno

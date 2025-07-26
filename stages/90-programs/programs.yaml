@@ -1,6 +1,7 @@
 packages:
   - flatpak
   - kitty
+  - alacritty
   - nautilus
   - nautilus-python
   - gnome-software
