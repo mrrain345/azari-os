@@ -1,0 +1,97 @@
+{
+  "editor.fontSize": 14,
+  "debug.console.fontSize": 14,
+  "terminal.integrated.fontSize": 14,
+  "chat.editor.fontSize": 14,
+  "markdown.preview.fontSize": 16,
+  "scm.inputFontSize": 14,
+
+  "editor.fontFamily": "FiraCode Nerd Font",
+  "editor.inlayHints.fontFamily": "FiraCode Nerd Font",
+  "editor.inlineSuggest.fontFamily": "FiraCode Nerd Font",
+  "debug.console.fontFamily": "FiraCode Nerd Font",
+  "chat.editor.fontFamily": "FiraCode Nerd Font",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
+
+  "markdown.preview.fontFamily": "Fira Sans",
+  "scm.inputFontFamily": "Fira Sans",
+
+  "editor.inlineSuggest.enabled": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.enablePersistentSessions": false,
+
+  "workbench.colorTheme": "Azari",
+  "window.controlsStyle": "hidden",
+  "editor.folding": false,
+  "editor.glyphMargin": false,
+  "editor.renderWhitespace": "trailing",
+
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true
+  },
+
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  // "deno.enable": true,
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "telemetry.telemetryLevel": "off",
+  
+  "rust-analyzer.inlayHints.closingBraceHints.enable": false,
+  "[rust]": {
+    "editor.tabSize": 4
+  },
+  "errorLens.enabledDiagnosticLevels": ["error", "info"],
+  "editor.tabSize": 2,
+  "json.format.enable": false,
+  "rust-analyzer.check.allTargets": false,
+  "javascript.autoClosingTags": false,
+  "javascript.format.semicolons": "remove",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.semi": false,
+  "prettier.trailingComma": "all",
+  "prettier.experimentalTernaries": true,
+  "files.associations": {
+    "*.css": "tailwindcss",
+  },
+  "window.titleBarStyle": "custom",
+  "notes.notesLocation": "/var/home/mrrain/Documents/Markdown",
+  "explorer.confirmPasteNative": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "Cargo.toml": "Cargo.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
+  "workbench.layoutControl.enabled": false,
+  "window.menuBarVisibility": "compact",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "python.analysis.typeCheckingMode": "standard"
+}

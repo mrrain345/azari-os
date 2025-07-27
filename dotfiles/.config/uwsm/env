@@ -1,0 +1,6 @@
+export XCURSOR_SIZE=24
+export XCURSOR_THEME=Bibata-Azari
+export GTK_THEME=adw-gtk3
+export QT_QPA_PLATFORMTHEME=gtk3
+
+export HYPRSHOT_DIR=$(xdg-user-dir PICTURES)/Screenshots

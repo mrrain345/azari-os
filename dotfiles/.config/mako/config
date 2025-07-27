@@ -1,0 +1,19 @@
+background-color=#171726FF
+border-color=#7199ee
+border-radius=6
+default-timeout=5000
+font=Fira Sans 10
+icons=true
+margin=12
+progress-color=over #374059
+text-color=#a0a8cd
+
+[urgency=high]
+background-color=#171726FF
+border-color=#7199ee
+text-color=#ee6d85
+
+[urgency=low]
+background-color=#171726FF
+border-color=#7199ee
+text-color=#d7a65f

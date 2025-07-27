@@ -1,0 +1,4 @@
+#!/bin/sh
+hyprctl keyword cursor:inactive_timeout=0.001 0.001
+sleep 0.05
+hyprshot $@ & (sleep 0.05 && hyprctl keyword cursor:inactive_timeout=0 1)

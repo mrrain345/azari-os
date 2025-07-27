@@ -1,0 +1,22 @@
+{
+  "name": "azari-theme",
+  "displayName": "AzariOS Theme",
+  "version": "1.0.0",
+  "publisher": "mrrain345",
+  "description": "AzariOS Theme for Visual Studio Code",
+  "categories": [
+    "Themes"
+  ],
+  "engines": {
+    "vscode": "^1.43.0"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Azari",
+        "uiTheme": "vs",
+        "path": "./themes/azari.json"
+      }
+    ]
+  }
+}
