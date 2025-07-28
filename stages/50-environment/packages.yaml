@@ -5,5 +5,7 @@ packages:
   - polkit
   - gvfs
   - gvfs-mtp
+  - qt5-qtwayland
+  - qt6-qtwayland
   - console-login-helper-messages-issuegen
   - console-login-helper-messages-profile

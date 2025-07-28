@@ -6,6 +6,7 @@ packages:
   - hyprland
   - hyprlock
   - hyprpolkitagent
+  - hypridle
   - hyprshot
   - hyprnome
   - wl-clip-persist
@@ -19,5 +20,8 @@ packages:
 systemd:
   services:
     hyprpolkitagent:
+      type: user
+      enabled: true
+    hypridle:
       type: user
       enabled: true
