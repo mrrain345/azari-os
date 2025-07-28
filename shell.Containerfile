@@ -10,9 +10,9 @@ RUN dnf install -y 'dnf5-command(copr)' nodejs22 git \
 RUN mkdir /output
 
 # Build astal shell
-COPY ./shell /app/astall
-RUN ags bundle /app/astall/app.ts /output/astal-shell
+COPY ./shell /app
+RUN ags bundle /app/app.ts /output/astal-shell
 
 # Export the output files
 FROM scratch
-COPY --from=builder /output/* /
+COPY --from=builder /output /

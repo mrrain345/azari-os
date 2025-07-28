@@ -16,7 +16,7 @@ VERSION=${2:-next}
 
 if [ "$ACTION" = "build-shell" ]; then
   echo "Building astal shell"
-  podman build -f shell.Containerfile --output=./res/astal-shell .
+  podman build -f shell.Containerfile --network=host --output=./res .
   exit 0
 fi
 

@@ -33,14 +33,16 @@ function AppButton({
           <icon icon={app.iconName} />
           <box valign={Gtk.Align.CENTER} vertical>
             <label className="name" truncate xalign={0} label={app.name} />
-            {app.description ?
+            {app.description ? (
               <label
                 className="description"
                 wrap
                 xalign={0}
                 label={app.description}
               />
-            : <box />}
+            ) : (
+              <box />
+            )}
           </box>
         </box>
       }
@@ -105,6 +107,7 @@ export default function Applauncher() {
       keymode={Astal.Keymode.ON_DEMAND}
       application={App}
       onShow={(self) => {
+        apps.reload()
         width.set(self.get_current_monitor().workarea.width)
       }}
       onKeyPressEvent={(self, ev) => {
