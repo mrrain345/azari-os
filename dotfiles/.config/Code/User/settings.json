@@ -33,6 +33,9 @@
     "markdown": true
   },
 
+  "github.copilot.chat.byok.ollamaEndpoint": "http://194.68.245.62:22143",
+  "github.copilot.nextEditSuggestions.enabled": true,
+
   "git.confirmSync": false,
   "git.autofetch": true,
   // "deno.enable": true,
@@ -92,6 +95,6 @@
   },
   "workbench.layoutControl.enabled": false,
   "window.menuBarVisibility": "compact",
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "python.analysis.typeCheckingMode": "standard"
+  "python.analysis.typeCheckingMode": "standard",
+  "mdb.mcp.server": "enabled",
 }
