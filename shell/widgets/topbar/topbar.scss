@@ -1,19 +1,18 @@
 @use "../../colors";
+@use "sass:color";
 
 $bg-color: colors.$bg;
 $bg-alt: colors.$bg-alt;
 $fg-color: colors.$fg;
 $accent-color: colors.$accent;
 $accent-muted: colors.$accent-muted;
-$opacity: 1.0;
 
 
 window.Topbar {
   border: none;
   box-shadow: none;
-  background-color: $bg-color;
+  background-color: color.change($bg-color, $alpha: 0.8);
   color: $fg-color;
-  opacity: $opacity;
   font-size: 1em;
   font-weight: bold;
 

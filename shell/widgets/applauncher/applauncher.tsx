@@ -138,7 +138,7 @@ export default function Applauncher() {
               <scrollable
                 className="AppList"
                 setup={(self) => (scrollable = self)}
-                heightRequest={465}
+                heightRequest={525}
                 visible={list.as((l) => l.length > 0)}
                 onKeyPressEvent={(self, ev) => {
                   const [_, keyval] = ev.get_keyval()
