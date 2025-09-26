@@ -1,0 +1,8 @@
+packages:
+  - power-profiles-daemon
+
+systemd:
+  services:
+    power-profiles-daemon:
+      type: system
+      enabled: true

@@ -2,3 +2,4 @@ import:
   - edid.yaml
   - hardware.yaml
   - nvidia.yaml
+  - power.yaml
