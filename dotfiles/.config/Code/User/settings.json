@@ -96,5 +96,5 @@
   "workbench.layoutControl.enabled": false,
   "window.menuBarVisibility": "compact",
   "python.analysis.typeCheckingMode": "standard",
-  "mdb.mcp.server": "enabled",
+  "mdb.mcp.server": "prompt",
 }

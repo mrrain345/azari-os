@@ -1,13 +1,9 @@
 #!/bin/sh
 ACTION=$1
-MONITOR=DP-3
+MONITOR=HDMI-A-1
 
 function monitor_enable() {
   hyprctl keyword monitor "$MONITOR, 1920x1080@60, 3840x0, 1" > /dev/null
-  hyprctl keyword workspace "999, monitor:$MONITOR, default:true, rounding:false, decorate:false, gapsin:0, gapsout:0, border:false" > /dev/null
-  hyprctl keyword windowrule "opacity 1.0, workspace:999" > /dev/null
-  hyprctl keyword windowrule "noanim, workspace:999" > /dev/null
-  hyprctl keyword windowrule "nodim, workspace:999" > /dev/null
 }
 
 function monitor_disable() {

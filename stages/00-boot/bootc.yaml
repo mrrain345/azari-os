@@ -21,5 +21,5 @@ files:
           - rd.driver.blacklist=nova_core
           - modprobe.blacklist=nova_core
           - nvidia-drm.modeset=1
-          - drm.edid_firmware=DP-3:edid/fullhd.bin
-          - video=DP-3:1920x1080@60e
+          - drm.edid_firmware=HDMI-A-1:edid/fullhd.bin
+          - video=HDMI-A-1:1920x1080@60e

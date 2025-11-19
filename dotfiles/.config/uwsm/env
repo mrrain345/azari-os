@@ -3,4 +3,8 @@ export XCURSOR_THEME=Bibata-Azari
 export GTK_THEME=adw-gtk3
 export QT_QPA_PLATFORMTHEME=gtk3
 
+export NVD_BACKEND,direct
+export LIBVA_DRIVER_NAME,nvidia
+export __GLX_VENDOR_LIBRARY_NAME,nvidia
+
 export HYPRSHOT_DIR=$(xdg-user-dir PICTURES)/Screenshots
