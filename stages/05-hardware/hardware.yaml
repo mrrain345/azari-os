@@ -5,6 +5,9 @@ packages:
   - iwlwifi-mvm-firmware
   - fwupd
 
+  # Bluetooth
+  - bluez
+
   # CPU optimization
   - irqbalance
   - stalld

@@ -1,3 +1,7 @@
+packages:
+  - bootc
+  - ostree
+
 files:
   "/usr/lib/ostree/prepare-root.conf":
     format: ini

@@ -1,7 +1,4 @@
 packages:
-  - mozilla-fira-sans-fonts
-  - mozilla-fira-mono-fonts
-  - fira-code-fonts
   - default-fonts
   - adwaita-fonts-all
   - google-noto-fonts-all

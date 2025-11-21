@@ -19,6 +19,12 @@ sudo ./build.sh upgrade
 stow -t ~ dotfiles
 ```
 
+## Switch versions
+
+```sh
+sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:latest
+```
+
 ## Useful links
 
 - [Bootc manual](https://bootc-dev.github.io/bootc/)

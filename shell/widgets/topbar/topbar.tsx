@@ -114,14 +114,26 @@ function BatteryLevel() {
   )
 }
 
-function Workspaces(props: { monitor: number }) {
+function getMonitor(hypr: Hyprland.Hyprland, monitor: Gdk.Monitor) {
+  return hypr.monitors.find(
+    (m) =>
+      m.get_model() === monitor.get_model() &&
+      m.x === monitor.geometry.x &&
+      m.y === monitor.geometry.y &&
+      m.width === monitor.geometry.width &&
+      m.height === monitor.geometry.height,
+  )
+}
+
+function Workspaces(props: { monitor: Gdk.Monitor }) {
   const hypr = Hyprland.get_default()
+  const monitor = getMonitor(hypr, props.monitor)
 
   return (
     <box className="Workspaces">
       {bind(hypr, "workspaces").as((wss) =>
         wss
-          .filter((ws) => ws.monitor.id === props.monitor)
+          .filter((ws) => ws.monitor === monitor)
           .sort((a, b) => a.id - b.id)
           .map((ws) => (
             <button
@@ -159,7 +171,7 @@ export default function Topbar(monitor: Gdk.Monitor, index: number) {
       child={
         <centerbox>
           <box hexpand halign={Gtk.Align.START}>
-            {[<Workspaces monitor={index} />]}
+            {[<Workspaces monitor={monitor} />]}
           </box>
           <box child={<Time />} />
           <box hexpand halign={Gtk.Align.END}>

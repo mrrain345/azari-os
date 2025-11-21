@@ -1,7 +1,7 @@
-FROM quay.io/fedora/fedora:42 AS builder
+FROM quay.io/fedora/fedora:43 AS builder
 
 # Install dependencies
-COPY --from=docker.io/denoland/deno:bin-2.3.5 /deno /usr/bin/deno
+COPY --from=docker.io/denoland/deno:bin-2.5.6 /deno /usr/bin/deno
 RUN mkdir /output
 
 # Build the containerfile

@@ -6,6 +6,7 @@ packages:
   - openssl
 
   # ip tools
+  - iputils
   - iproute
   - iproute-tc
 

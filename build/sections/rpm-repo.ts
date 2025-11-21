@@ -10,10 +10,12 @@ const RepoConfigSchema = z
     enabled: z
       .boolean()
       .default(true)
+      .transform((val) => (val ? 1 : 0))
       .describe("Whether the repository is enabled"),
     gpgcheck: z
       .boolean()
       .default(true)
+      .transform((val) => (val ? 1 : 0))
       .describe("Whether to check GPG signatures"),
   })
   .describe("RPM Repository configuration")
@@ -24,9 +26,9 @@ export default Section("rpm-repo", {
   load(repos) {
     for (const [id, repo] of Object.entries(repos)) {
       const repoPath = `/etc/yum.repos.d/${id}.repo`
-      builder.run(`rpm --import ${repo.gpgkey}`, "initial")
+      if (repo.gpgkey) builder.run(`rpm --import ${repo.gpgkey}`, "initial")
       const content = ini.stringify({ [id]: repo })
-      builder.file(repoPath, content.replace(/\$/g, "\\$"), {}, "initial")
+      builder.file(repoPath, content, {}, "initial")
     }
   },
 })
