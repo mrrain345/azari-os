@@ -25,6 +25,26 @@ stow -t ~ dotfiles
 sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:latest
 ```
 
+## Quick update
+
+```sh
+AZARI_VERSION=26.2.1 # Set the version
+
+sudo podman build \
+  --network=host \
+  --security-opt=label=disable \
+  --cap-add=all \
+  --device /dev/fuse \
+  -f update.containerfile \
+  -t docker.io/mrrain345/azari:${AZARI_VERSION} \
+  -t docker.io/mrrain345/azari:latest .
+
+sudo podman push docker.io/mrrain345/azari:${AZARI_VERSION}
+sudo podman push docker.io/mrrain345/azari:latest
+
+sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:latest
+```
+
 ## Useful links
 
 - [Bootc manual](https://bootc-dev.github.io/bootc/)

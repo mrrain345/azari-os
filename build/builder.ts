@@ -222,7 +222,7 @@ function execute(version: string) {
   console.log(`COPY . /usr/lib/azari/current`)
 
   console.log("RUN ostree container commit")
-  console.log(`LABEL org.opencontainers.image.version ${version}`)
+  console.log(`LABEL org.opencontainers.image.version=${version}`)
   console.log("LABEL containers.bootc 1")
   console.log("STOPSIGNAL SIGRTMIN+3")
   console.log('CMD ["/sbin/init"]')
