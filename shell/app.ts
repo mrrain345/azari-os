@@ -8,8 +8,8 @@ import Backdrop from "./widgets/system-menu/backdrop"
 App.start({
   css: style,
   main() {
-    App.get_monitors().map(Topbar)
-    OSD()
+    // App.get_monitors().map(Topbar)
+    // OSD()
     // Backdrop()
     Applauncher()
   },
