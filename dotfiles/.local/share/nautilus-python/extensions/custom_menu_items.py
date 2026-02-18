@@ -31,9 +31,11 @@ class CustomMenuItemsProvider(GObject.GObject, Nautilus.MenuProvider):
         )
 
         path = directory.get_location().get_path()
-        terminal.connect("activate", self.open_in_terminal, path)
+        # terminal.connect("activate", self.open_in_terminal, path)
         vscode.connect("activate", self.open_in_vscode, path)
-        return [terminal, vscode]
+        
+        # return [terminal, vscode]
+        return [vscode]
         
     def open_in_terminal(self, menu, path):
         subprocess.Popen(["uwsm", "app", "--", "alacritty", "--working-directory", path])

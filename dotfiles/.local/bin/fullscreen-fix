@@ -1,0 +1,11 @@
+#/bin/sh
+
+HYPR_SOCKET=$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock
+
+handle() {
+  if [ "$1" = "fullscreen>>1" ]; then
+    hyprctl activewindow -j | jq -e ".fullscreen==1" && hyprctl dispatch fullscreen 1
+  fi
+}
+
+socat -U - UNIX-CONNECT:$HYPR_SOCKET | while read -r line; do handle "$line"; done

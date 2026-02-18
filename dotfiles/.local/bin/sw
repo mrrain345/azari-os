@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# If no arguments or the first argument is a option, pass all arguments to eza
+if [ -z "$1" ] || [ "${1#-}" != "$1" ]; then
+  eza -l "$@"
+
+# If it is a directory, show its contents
+elif [ -d "$1" ]; then
+  eza -l "$@"
+
+# If it is a graphical file (follow symlinks), show it with kitty
+elif file --mime-type -bL "$1" | grep -q '^image/'; then
+  kitty icat --align left "$1"
+
+# If it is a text file, show it with bat
+elif file --mime-type -bL "$1" | grep -q '^text/'; then
+  bat "$1"
+
+# Otherwise, show it with eza
+else
+  eza -l "$@"
+fi
