@@ -10,7 +10,7 @@ elif [ -d "$1" ]; then
 
 # If it is a graphical file (follow symlinks), show it with kitty
 elif file --mime-type -bL "$1" | grep -q '^image/'; then
-  kitty icat --align left "$1"
+  kitten icat --align left "$1"
 
 # If it is a text file, show it with bat
 elif file --mime-type -bL "$1" | grep -q '^text/'; then

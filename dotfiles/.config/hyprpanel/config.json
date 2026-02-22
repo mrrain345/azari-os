@@ -401,8 +401,6 @@
     "/var"
   ],
   "menus.clock.time.military": true,
-  "menus.clock.weather.unit": "metric",
-  "menus.clock.weather.enabled": true,
   "menus.dashboard.shortcuts.enabled": false,
   "menus.dashboard.powermenu.avatar.image": "/var/home/mrrain/.config/avatar.jpg",
   "menus.dashboard.directories.left.directory1.label": "󰚝  Code",
@@ -442,5 +440,9 @@
   "theme.osd.muted_zero": true,
   "bar.notifications.hideCountWhenZero": true,
   "bar.notifications.show_total": true,
-  "bar.workspaces.applicationIconEmptyWorkspace": ""
+  "bar.workspaces.applicationIconEmptyWorkspace": "",
+  "menus.clock.weather.unit": "metric",
+  "menus.clock.weather.enabled": true,
+  "menus.clock.weather.key": ".config/hyprpanel/weather.json",
+  "menus.clock.weather.location": "Zielona_Góra"
 }

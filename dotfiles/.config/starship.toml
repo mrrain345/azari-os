@@ -1,0 +1,156 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$directory\
+$git_branch\
+$git_status\
+$c\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+$conda\
+[](fg:prev_bg)\
+$line_break\
+$cmd_duration\
+$status\
+$character"""
+
+
+add_newline = true
+palette = 'tokyo_night'
+
+[username]
+show_always = false
+style_user = "bg:sapphire fg:crust"
+style_root = "bg:red fg:crust"
+format = '[ $user]($style)[ ](fg:prev_bg bg:blue)'
+
+[directory]
+style = "bg:blue fg:crust"
+format = "[ $path ]($style)"
+truncation_length = 6
+# truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = "bg:yellow fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol $branch ]($style)'
+
+[git_status]
+disabled = true
+style = "bg:yellow fg:crust"
+format = '[$all_status$ahead_behind]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
+vimcmd_replace_symbol = '[❮](bold fg:lavender)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
+
+[cmd_duration]
+disabled = false
+style = "fg:lavender"
+format = "[ $duration ]($style)"
+
+[status]
+disabled = false
+style = "bold fg:red"
+symbol = "✘"
+format = '[$symbol$status ]($style)'
+
+
+[nodejs]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[c]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[golang]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[php]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[java]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version) ]($style)'
+
+[python]
+symbol = ""
+style = "bg:green fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $version)(\(#$virtualenv\)) ]($style)'
+
+[docker_context]
+symbol = ""
+style = "bg:sapphire fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $context) ]($style)'
+
+[conda]
+symbol = ""
+style = "bg:sapphire fg:crust"
+format = '[]($style fg:prev_bg)[ $symbol( $environment) ]($style)'
+ignore_base = false
+
+
+[palettes.tokyo_night]
+red = "#f7768e"	    # This keyword, HTML elements, Regex group symbol, CSS units, Terminal Red
+peach = "#ff9e64"	  # Number and Boolean constants, Language support constants
+yellow = "#e0af68"  	# Function parameters, Regex character sets, Terminal Yellow
+skin = "#cfc9c2"	    # Parameters inside functions (semantic highlighting only)
+green = "#9ece6a"	  # Strings, CSS class names
+teal = "#73daca"	    # Object literal keys, Markdown links, Terminal Green
+lime = "#b4f9f8"	    # Regex literal strings
+aqua = "#2ac3de"	    # Language support functions, CSS HTML elements
+sapphire = "#7dcfff"	# Object properties, Regex quantifiers and flags, Markdown headings, Terminal Cyan, Markdown code, Import/export keywords
+blue = "#7aa2f7"	    # Function names, CSS property names, Terminal Blue
+mauve = "#bb9af7"	  # Control Keywords, Storage Types, Regex symbols and operators, HTML Attributes, Terminal Magenta
+silver = "#c0caf5"	  # Variables, Class names, Terminal White
+text = "#a9b1d6"	    # Editor Foreground
+lavender = "#9aa5ce"	# Markdown Text, HTML Text
+gray = "#565f89"	    # Comments
+base = "#414868"	    # Terminal Black
+mantle = "#24283b"	  # Editor Background (Storm)
+crust = "#1a1b26"	  # Editor Background (Night)
