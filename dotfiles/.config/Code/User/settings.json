@@ -97,4 +97,7 @@
   "window.menuBarVisibility": "compact",
   "python.analysis.typeCheckingMode": "standard",
   "mdb.mcp.server": "prompt",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }

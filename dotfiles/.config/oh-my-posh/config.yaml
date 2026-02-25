@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/tags/v26.18.0/themes/schema.json
+
+version: 3
+final_space: true
+
+palette:
+  text: "#1a1b26" # Text foreground
+  blue: "#7aa2f7" # Directory and time
+  red: "#f7768e" # Root and error
+  green: "#9ece6a" # Git clean
+  yellow: "#e0af68" # Git dirty
+  purple: "#bb9af7" # SSH session and Git behind
+  teal: "#73daca" # Git ahead
+
+transient_prompt:
+  newline: true
+  template: "<p:blue,transparent></><,p:blue> {{ .PWD }} </><p:blue,transparent></> "
+  foreground: p:text
+  background: transparent
+
+blocks:
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: session
+        # style: powerline
+        # powerline_symbol: 
+        # leading_powerline_symbol: 
+        style: diamond
+        leading_diamond: 
+        trailing_diamond: 
+        template: "{{ if .SSHSession }} {{ end }}{{ .UserName }}{{ if .SSHSession }}@{{ .HostName }}{{ end }} "
+        foreground: p:text
+        background_templates:
+          - "{{ if .Root }}p:red{{ end }}"
+          - "{{ if .SSHSession }}p:purple{{ end }}"
+          - "p:blue"
+
+      - type: path
+        style: powerline
+        template: "  {{ path .Path .Location }} "
+        powerline_symbol: 
+        leading_powerline_symbol: 
+        background: p:blue
+        foreground: p:text
+        properties:
+          style: agnoster_short
+          max_depth: 3
+          hide_root_location: true
+
+      - type: git
+        style: powerline
+        powerline_symbol: 
+        template: " {{ .HEAD }} "
+        properties:
+          branch_template: "{{ trunc 25 .Branch }}"
+          fetch_status: true
+          fetch_upstream_icon: true
+        foreground: p:text
+        background_templates:
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}"
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:red{{ end }}"
+          - "{{ if gt .Ahead 0 }}p:teal{{ end }}"
+          - "{{ if gt .Behind 0 }}p:purple{{ end }}"
+          - "p:green"
+
+  - type: rprompt
+    segments:
+      - type: executiontime
+        style: plain
+        template: "  {{ .FormattedMs }}"
+        foreground: p:blue
+        properties:
+          style: round
+          always_enabled: false
+          threshold: 300
+
+      - type: status
+        style: plain
+        template: " {{ if gt .Code 0 }}✘{{ .Code }}{{ end }}"
+        foreground: p:red
+        properties:
+          always_enabled: false

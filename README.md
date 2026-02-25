@@ -36,10 +36,10 @@ sudo podman build \
   --cap-add=all \
   --device /dev/fuse \
   -f update.containerfile \
-  -t docker.io/mrrain345/azari:${AZARI_VERSION} \
+  -t docker.io/mrrain345/azari:$AZARI_VERSION \
   -t docker.io/mrrain345/azari:latest .
 
-sudo podman push docker.io/mrrain345/azari:${AZARI_VERSION}
+sudo podman push docker.io/mrrain345/azari:$AZARI_VERSION
 sudo podman push docker.io/mrrain345/azari:latest
 
 sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:latest
