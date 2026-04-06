@@ -7,3 +7,5 @@
 	recurse = true
 [push]
 	recurseSubmodules = on-demand
+[alias]
+	graph = log --all --decorate --oneline --graph

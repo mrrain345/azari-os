@@ -28,9 +28,10 @@ sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:lates
 ## Quick update
 
 ```sh
-AZARI_VERSION=26.2.1 # Set the version
+sudo su
+set AZARI_VERSION 26.3.0 # Set the version
 
-sudo podman build \
+podman build \
   --network=host \
   --security-opt=label=disable \
   --cap-add=all \
@@ -39,10 +40,10 @@ sudo podman build \
   -t docker.io/mrrain345/azari:$AZARI_VERSION \
   -t docker.io/mrrain345/azari:latest .
 
-sudo podman push docker.io/mrrain345/azari:$AZARI_VERSION
-sudo podman push docker.io/mrrain345/azari:latest
+podman push docker.io/mrrain345/azari:$AZARI_VERSION
+podman push docker.io/mrrain345/azari:latest
 
-sudo bootc switch --transport containers-storage docker.io/mrrain345/azari:latest
+bootc switch --transport containers-storage docker.io/mrrain345/azari:latest
 ```
 
 ## Useful links
